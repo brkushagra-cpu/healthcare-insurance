@@ -1,0 +1,22 @@
+[
+  {
+    "planId": "plan_001",
+    "name": "Health Secure Plus",
+    "insurer": "HDFC Ergo",
+    "maxAge": 60,
+    "maxCoverage": 1000000,
+    "basePrice": 4000,
+    "claimRatio": 92,
+    "features": ["Cashless hospitals", "No claim bonus"]
+  },
+  {
+    "planId": "plan_002",
+    "name": "Care Supreme",
+    "insurer": "Care Health",
+    "maxAge": 65,
+    "maxCoverage": 1500000,
+    "basePrice": 5000,
+    "claimRatio": 90,
+    "features": ["Global cover", "Daycare procedures"]
+  }
+]

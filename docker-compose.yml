@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: eptain_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - eptain-net
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    container_name: eptain_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/eptainInsuranceDB
+      - JWT_SECRET=production_super_secret_key_8492
+      - STRIPE_MOCK_KEY=sk_test_12345
+    depends_on:
+      - mongodb
+    networks:
+      - eptain-net
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: eptain_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api/v1
+    depends_on:
+      - backend
+    networks:
+      - eptain-net
+    restart: on-failure
+
+networks:
+  eptain-net:
+    driver: bridge
+
+volumes:
+  mongo_data:

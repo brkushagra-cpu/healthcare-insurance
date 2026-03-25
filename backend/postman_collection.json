@@ -1,0 +1,104 @@
+{
+  "info": {
+    "_postman_id": "b6f5d820-2c7v-4d2h-j1l0-eptainapp342",
+    "name": "Eptain Core Insurance API - Production V1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Quote Generation Engine",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user\": {\n    \"age\": 30,\n    \"city\": \"Delhi\",\n    \"members\": 2,\n    \"coverage\": 1000000\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/quote",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "quote"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status is success\", function () {",
+              "    pm.response.to.have.jsonBody(\"status\", \"success\");",
+              "});",
+              "pm.test(\"Returns array of recommended plans\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.plans).to.be.an('array');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get Base Master Plans",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "plans"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Capture Lead Details",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quoteId\": \"Q12345\",\n  \"user\": {\n    \"name\": \"Jane Doe\",\n    \"phone\": \"9876543210\",\n    \"email\": \"jane.doe@example.com\"\n  },\n  \"selectedPlanId\": \"plan_001\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/lead",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "lead"
+          ]
+        }
+      }
+    }
+  ]
+}
