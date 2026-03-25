@@ -1,91 +1,124 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Zap, Activity } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Shield, Users, Clock, ChevronRight, Activity, Zap, BarChart3, Globe, Sparkles } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const handleMouse = (e) => {
+      // Small adjustment for parallax effect
+      const x = (e.clientX / window.innerWidth - 0.5) * 15;
+      const y = (e.clientY / window.innerHeight - 0.5) * 15;
+      setMousePos({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouse);
+    return () => window.removeEventListener('mousemove', handleMouse);
+  }, []);
 
   return (
-    <div className="w-full flex flex-col pt-8 pb-20 animate-fade-in text-slate-100">
-      
-      {/* Dynamic Hero Section */}
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 min-h-[70vh]">
-        
-        {/* Left Copy Layer */}
-        <div className="flex-1 relative z-10 space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass rounded-full border border-cyan-500/30 text-cyan-400 text-sm font-bold tracking-widest shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-            <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span></span>
-            NEURAL ENGINE ONLINE
-          </div>
+    <div className="w-full bg-prism-dark overflow-hidden min-h-screen relative text-white">
+      {/* Background Grid */}
+      <div className="fixed inset-0 z-0 pointer-events-none matrix-grid opacity-20"></div>
+
+      {/* Hero Section */}
+      <section className="relative pt-48 pb-32 flex items-center justify-center min-h-screen px-6 overflow-hidden">
+        <div className="max-w-[1200px] w-full relative z-10 flex flex-col items-center text-center">
           
-          <h1 className="text-6xl lg:text-8xl font-black tracking-tighter leading-[1.1]">
-            AI-Powered <br/>
-            <span className="text-gradient">Health Protection</span>
-          </h1>
-          
-          <p className="text-xl text-slate-400 font-medium max-w-xl leading-relaxed">
-            Smarter Plans. Faster Decisions. Let our deterministic AI map your risk profile against thousands of policies in exactly 60 seconds.
-          </p>
-          
-          <div className="pt-4 flex flex-col sm:flex-row gap-6">
-            <button 
-              onClick={() => navigate('/quote')} 
-              className="btn-glow text-white font-black py-5 px-10 rounded-2xl text-lg flex items-center justify-center gap-3 w-full sm:w-auto"
-            >
-              Generate Smart Quote <Zap className="fill-white" size={20} />
-            </button>
-            <button 
-              className="glass px-8 py-5 rounded-2xl text-slate-300 font-bold hover:text-white hover:bg-white/10 transition w-full sm:w-auto text-center border border-white/10"
-            >
-              How it works
-            </button>
-          </div>
-          
-          {/* Trust Hooks */}
-          <div className="pt-8 flex items-center gap-6 text-sm font-semibold text-slate-400">
-             <div className="flex items-center gap-2"><ShieldCheck className="text-green-400" size={18}/> 95% Claim Success</div>
-             <div className="flex items-center gap-2"><Activity className="text-purple-400" size={18}/> IRDAI Approved Algorithms</div>
+          {/* Main 3D Asset - Photorealistic Heart with Mouse Tilt */}
+          <motion.div 
+            animate={{ 
+              x: mousePos.x, 
+              y: mousePos.y, 
+              rotateX: -mousePos.y * 0.3, 
+              rotateY: mousePos.x * 0.3 
+            }}
+            transition={{ type: "spring", stiffness: 100, damping: 30 }}
+            className="absolute z-0 opacity-40 grayscale-[0.5] transition-opacity duration-1000"
+          >
+            <img src="/assets/luxe_heart.png" className="w-[850px] h-auto pointer-events-none float-slow shadow-2xl" alt="Luxe Medical 3D" />
+          </motion.div>
+
+          {/* Central Prismatic Glass Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="prismatic-glass p-12 md:p-24 max-w-[950px] w-full text-center relative z-20 shadow-[0_0_150px_rgba(0,0,0,0.7)] border-white/10 holographic-shine"
+          >
+            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/20 text-[var(--accent-emerald)] text-[12px] font-black uppercase tracking-[0.4em] mb-12 shadow-glow">
+               <Activity size={16} className="animate-pulse" /> VENTURE-GRADE INTELLIGENCE
+            </div>
+            
+            <h1 className="text-7xl md:text-[140px] font-black text-white leading-[0.75] tracking-tighter mb-12">
+              Human <br />
+              <span className="text-gradient">Autonomy.</span>
+            </h1>
+            
+            <p className="text-[22px] text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed mb-16 px-4">
+              The world's first <span className="text-white font-black">Deterministic AI Underwriting System</span>. Achieving clinical-grade precision for enterprise risk management.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 px-6">
+              <motion.button 
+                whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(16,185,129,0.5)" }}
+                onClick={() => navigate('/my-policies')}
+                className="btn-primary w-full sm:w-auto px-16 py-7 text-[17px] shadow-none"
+              >
+                INITIALIZE PORTAL
+              </motion.button>
+              <button 
+                onClick={() => navigate('/calculators')} 
+                className="btn-secondary w-full sm:w-auto px-12 py-7 text-[16px] backdrop-blur-md"
+              >
+                MARKET AUDIT
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Venture Stats Section */}
+          <div className="mt-32 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-white/5 pt-16 relative z-10">
+            {[
+              { label: 'Latency', val: '42ms', icon: Zap },
+              { label: 'Risk Coverage', val: '100%', icon: Shield },
+              { label: 'Enterprise Partners', val: '800+', icon: Globe },
+              { label: 'Growth YoY', val: '4.2x', icon: BarChart3 }
+            ].map((s, i) => (
+              <div key={i} className="text-center group cursor-pointer hover:scale-105 transition-transform">
+                <s.icon size={20} className="mx-auto mb-4 text-[var(--accent-emerald)] opacity-50 group-hover:opacity-100 transition-opacity" />
+                <p className="text-2xl font-black text-white">{s.val}</p>
+                <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mt-1">{s.label}</p>
+              </div>
+            ))}
           </div>
         </div>
-        
-        {/* Right 3D Visual Layer */}
-        <div className="flex-1 relative w-full max-w-md lg:max-w-xl animate-float">
-          {/* Main Floating Glass Panel */}
-          <div className="glass-card p-8 rounded-3xl w-full border border-white/20 shadow-[-20px_20px_60px_rgba(0,0,0,0.5)] relative z-20">
-             <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
-               <h3 className="text-xl font-bold text-slate-200 tracking-wide">Risk Assessment</h3>
-               <div className="w-12 h-6 bg-cyan-500/20 rounded-full flex items-center p-1 border border-cyan-500/50">
-                 <div className="w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]"></div>
-               </div>
-             </div>
-             
-             <div className="space-y-6">
-               <div className="space-y-2">
-                 <div className="flex justify-between text-sm font-medium"><span className="text-slate-400">Profile Confidence</span><span className="text-cyan-400">98.4%</span></div>
-                 <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 w-[98%]"></div></div>
-               </div>
-               <div className="space-y-2">
-                 <div className="flex justify-between text-sm font-medium"><span className="text-slate-400">Actuarial Match</span><span className="text-purple-400">Elite Tier</span></div>
-                 <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 w-[85%] animate-pulse"></div></div>
-               </div>
-             </div>
-             
-             <div className="mt-10 p-4 bg-slate-900/50 rounded-xl border border-white/5 flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center border-2 border-slate-900 shadow-lg"><ShieldCheck size={20} className="text-white"/></div>
-                <div>
-                  <div className="text-xs text-slate-400 font-bold uppercase tracking-wider">Status</div>
-                  <div className="text-lg font-black text-white">Coverage Verified</div>
-                </div>
-             </div>
-          </div>
-          
-          {/* Decorative BackPanels */}
-          <div className="absolute top-10 -right-8 w-full h-full glass rounded-3xl z-10 border border-purple-500/20 bg-purple-900/10 rotate-3"></div>
-          <div className="absolute top-20 -left-6 w-full h-full glass rounded-3xl z-0 border border-blue-500/20 bg-blue-900/10 -rotate-3 blur-[2px]"></div>
+      </section>
+
+      {/* Venture Market Ticker */}
+      <div className="w-full bg-white/5 border-y border-white/5 py-10 overflow-hidden relative z-20 backdrop-blur-3xl">
+        <div className="flex whitespace-nowrap animate-[marquee_50s_linear_infinite] gap-24 items-center opacity-30">
+          {['APOLLO CLINICAL', 'VENTURE CAPITAL PARTNERS', 'IRDAI COMPLIANT', 'ZERO-TRUST ARCHITECTURE', '99.9% ACCURACY', 'QUANTUM-GRADE ENCRYPTION', 'BLOCKCHAIN AUDIT READY'].map((t, i) => (
+            <div key={i} className="flex items-center gap-4 text-2xl font-black tracking-widest text-white italic">
+               <Sparkles size={16} /> {t}
+            </div>
+          ))}
+          {['APOLLO CLINICAL', 'VENTURE CAPITAL PARTNERS', 'IRDAI COMPLIANT', 'ZERO-TRUST ARCHITECTURE', '99.9% ACCURACY', 'QUANTUM-GRADE ENCRYPTION', 'BLOCKCHAIN AUDIT READY'].map((t, i) => (
+            <div key={i+10} className="flex items-center gap-4 text-2xl font-black tracking-widest text-white italic">
+               <Sparkles size={16} /> {t}
+            </div>
+          ))}
         </div>
-        
       </div>
-      
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </div>
   );
 }

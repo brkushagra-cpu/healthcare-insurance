@@ -1,34 +1,35 @@
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "mock-key-for-mvp" // Replaced at runtime
-});
+let model;
+
+function getModel() {
+  if (!model) {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  }
+  return model;
+}
 
 export async function getAIResponse(userMessage, contextData) {
-  // If no real API key is provided, Fallback to a deterministic mock
-  if (!process.env.OPENAI_API_KEY) {
-      return "I'm the Eptain AI Copilot (Mock). I can see you have " + contextData.length + " base plans available in the system! Please provide an OpenAI API key in the environment to unlock full RAG conversational capabilities.";
+  if (!process.env.GEMINI_API_KEY) {
+    return "I'm the Eptain AI Copilot. Please provide a Gemini API key in the .env to unlock full conversational AI.";
   }
 
-  const response = await client.chat.completions.create({
-    model: "gpt-4o-mini",
-    max_tokens: 300,
-    messages: [
-      {
-        role: "system",
-        content: `
-You are an expert health insurance advisor for Eptain Protect.
-Only answer related to healthcare and vehicle insurance products provided in the context data.
-Do not give financial or medical advice beyond general guidance.
-Be clear, concise, and trustworthy.
-        `
-      },
-      {
-        role: "user",
-        content: `User Query: ${userMessage}\nAvailable Plans Context: ${JSON.stringify(contextData)}`
-      }
-    ]
-  });
+  try {
+    const prompt = `You are an expert insurance advisor for Eptain, a premium enterprise insurtech platform trusted by leading healthcare carriers. 
 
-  return response.choices[0].message.content;
+Your role: Help users understand insurance plans, compare options, and make informed decisions. Be professional, clear, and concise. Use the available plans data as context when relevant.
+
+Available Plans: ${JSON.stringify(contextData || [])}
+
+User Question: ${userMessage}
+
+Respond in a helpful, professional tone. Keep responses under 150 words.`;
+
+    const result = await getModel().generateContent(prompt);
+    return result.response.text();
+  } catch (err) {
+    console.error("Gemini API Error:", err.message);
+    return "I'm experiencing a brief connectivity issue. Please try again in a moment, or explore our plans directly.";
+  }
 }

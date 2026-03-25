@@ -2,97 +2,136 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Tech Luxe Dark Base */
+  --bg-primary: #020617; 
+  --bg-secondary: #0F172A;
+  --bg-tertiary: #1E293B;
+  --bg-card: rgba(15, 23, 42, 0.7);
+
+  /* Prismatic Accents */
+  --accent-emerald: #10B981; 
+  --accent-violet: #8B5CF6;  
+  --accent-blue: #3B82F6;
+  --accent-rose: #F43F5E;
+  
+  /* Text System */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+  
+  /* Borders & Glass */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-blur: 24px;
+  
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
 @layer base {
   body {
-    background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-    background-attachment: fixed;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+    @apply bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
   }
 }
 
-@layer utilities {
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+@layer components {
+  .prismatic-glass {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
   }
 
-  .glass-card {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(148, 163, 184, 0.1);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  .prismatic-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
   }
 
-  .btn-glow {
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-    transition: all 0.3s ease;
+  .input-field {
+    @apply bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-slate-500 transition-all focus:outline-none focus:border-[var(--accent-emerald)] focus:ring-1 focus:ring-[var(--accent-emerald)];
   }
 
-  .btn-glow:hover {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.7);
-    transform: translateY(-2px);
+  .btn-primary {
+    @apply relative overflow-hidden bg-[var(--accent-emerald)] text-[var(--bg-primary)] font-black uppercase tracking-widest text-[13px] px-8 py-4 rounded-full transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] active:scale-[0.98];
   }
 
-  .input-neon {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    transition: all 0.3s ease;
-  }
-
-  .input-neon:focus {
-    outline: none;
-    border-color: #22d3ee;
-    box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
-    background: rgba(255, 255, 255, 0.08);
+  .btn-secondary {
+    @apply px-8 py-4 rounded-full border border-white/10 text-white font-black uppercase tracking-widest text-[13px] transition-all hover:bg-white/5 hover:border-white/20;
   }
 
   .text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(90deg, #3b82f6, #22d3ee);
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent-emerald)] via-[var(--accent-blue)] to-[var(--accent-violet)];
   }
-  
-  .text-gradient-purple {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(90deg, #8b5cf6, #d946ef);
+
+  /* Venture Luxe Utilities */
+  .holographic-shine {
+    position: relative;
+    overflow: hidden;
   }
-}
-
-/* Animations */
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 1;
-    box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  .holographic-shine::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(
+      from 180deg at 50% 50%,
+      rgba(16, 185, 129, 0) 0deg,
+      rgba(16, 185, 129, 0.1) 80deg,
+      rgba(139, 92, 246, 0.1) 120deg,
+      rgba(16, 185, 129, 0) 180deg
+    );
+    animation: rotate-shine 10s linear infinite;
+    pointer-events: none;
   }
-  50% {
-    opacity: .5;
-    box-shadow: 0 0 30px rgba(34, 211, 238, 0.8);
+
+  @keyframes rotate-shine {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .matrix-grid {
+    background-image: 
+      linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .neural-scan-beam {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--accent-emerald), transparent);
+    box-shadow: 0 0 20px var(--accent-emerald);
+    animation: scan-vertical 3s ease-in-out infinite;
+    z-index: 50;
+  }
+
+  @keyframes scan-vertical {
+    0%, 100% { top: 0% }
+    50% { top: 100% }
+  }
+
+  .bg-prism-dark {
+    background: 
+      radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+      var(--bg-primary);
+  }
+
+  .float-slow { animation: float 6s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
 }

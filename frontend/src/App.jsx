@@ -6,31 +6,37 @@ import Quote from './pages/Quote';
 import Results from './pages/Results';
 import Checkout from './pages/Checkout';
 import AdminDashboard from './pages/AdminDashboard';
+import Solutions from './pages/Solutions';
+import Enterprise from './pages/Enterprise';
+import Compare from './pages/Compare';
+import Hospitals from './pages/Hospitals';
+import MyPolicies from './pages/MyPolicies';
+import Calculators from './pages/Calculators';
+import Security from './pages/Security';
 import Chatbot from './components/Chatbot';
 
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col relative text-slate-100 selection:bg-cyan-500/30">
-        
-        {/* Background Ambient Orbs */}
-        <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/20 blur-[120px] pointer-events-none z-0"></div>
-        <div className="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-purple-600/10 blur-[150px] pointer-events-none z-0"></div>
-
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-12">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/quote" element={<Quote />} />
-              <Route path="/results/:quoteId" element={<Results />} />
-              <Route path="/checkout/:leadId" element={<Checkout />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          </main>
-          
-          <Chatbot />
-        </div>
+      <div className="min-h-screen flex flex-col font-sans bg-[var(--bg-primary)]">
+        <Navbar />
+        <main className="flex-1 w-full">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/compare" element={<Compare />} />
+            <Route path="/hospitals" element={<Hospitals />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/enterprise" element={<Enterprise />} />
+            <Route path="/quote" element={<Quote />} />
+            <Route path="/results/:quoteId" element={<Results />} />
+            <Route path="/checkout/:leadId" element={<Checkout />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/my-policies" element={<MyPolicies />} />
+            <Route path="/calculators" element={<Calculators />} />
+            <Route path="/security" element={<Security />} />
+          </Routes>
+        </main>
+        <Chatbot />
       </div>
     </Router>
   );

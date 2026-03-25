@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import compression from "compression";
@@ -11,6 +12,10 @@ import planRoutes from "./routes/planRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import aiRoutes from "./routes/aiRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
+import riskRoutes from "./routes/riskRoutes.js";
+import compareRoutes from "./routes/compareRoutes.js";
+import hospitalRoutes from "./routes/hospitalRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -48,6 +53,10 @@ app.use("/api/v1/plans", planRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/ai", aiRoutes);
 app.use("/api/v1/analytics", analyticsRoutes);
+app.use("/api/v1/risk", riskRoutes);
+app.use("/api/v1/compare", compareRoutes);
+app.use("/api/v1/hospitals", hospitalRoutes);
+app.use("/api/v1/user", userRoutes);
 
 // 4. Health check
 app.get("/", (req, res) => {
