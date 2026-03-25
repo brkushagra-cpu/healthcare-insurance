@@ -22,10 +22,10 @@ export default function AdminDashboard() {
   );
 
   const kpis = [
-    { icon: Activity, label: 'Total Quotes', value: data?.metrics.totalQuotes || 849, change: '+12.5%', color: 'var(--accent-violet)', rgb: '139,92,246' },
-    { icon: Users, label: 'Captured Leads', value: data?.metrics.totalLeads || 124, change: '+8.3%', color: 'var(--accent-sky)', rgb: '56,189,248' },
-    { icon: HeartPulse, label: 'AI Conversations', value: data?.metrics.aiConversations || 2847, change: '+24.1%', color: 'var(--accent-emerald)', rgb: '52,211,153' },
-    { icon: ShieldCheck, label: 'Conversion Rate', value: `${data?.metrics.conversionRate || 14.6}%`, change: '+2.1%', color: 'var(--accent-rose)', rgb: '244,63,94' },
+    { icon: Activity, label: 'Claims STP Rate', value: '94.2%', change: 'IRDAI Target: 90%+', color: 'var(--accent-emerald)', rgb: '52,211,153' },
+    { icon: Users, label: 'Live Risk Evaluations', value: data?.metrics.totalLeads || 124, change: '+8.3%', color: 'var(--accent-sky)', rgb: '56,189,248' },
+    { icon: HeartPulse, label: 'Age 65+ Policies', value: '1,204', change: 'Zero Entry Barrier', color: 'var(--accent-violet)', rgb: '139,92,246' },
+    { icon: ShieldCheck, label: 'Fraud Detection Rate', value: '99.8%', change: 'Zero-Trust Active', color: 'var(--accent-rose)', rgb: '244,63,94' },
   ];
 
   return (

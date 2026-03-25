@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Users, Clock, ChevronRight, Activity, Zap, BarChart3, Globe, Sparkles } from 'lucide-react';
+import luxeHeart from '../assets/luxe_heart.png';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function Home() {
             transition={{ type: "spring", stiffness: 100, damping: 30 }}
             className="absolute z-0 opacity-40 grayscale-[0.5] transition-opacity duration-1000"
           >
-            <img src="/assets/luxe_heart.png" className="w-[850px] h-auto pointer-events-none float-slow shadow-2xl" alt="Luxe Medical 3D" />
+            <img src={luxeHeart} className="w-[850px] h-auto pointer-events-none float-slow shadow-2xl" alt="Luxe Medical 3D" />
           </motion.div>
 
           {/* Central Prismatic Glass Card */}
@@ -65,13 +66,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 px-6">
               <motion.button 
                 whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(16,185,129,0.5)" }}
-                onClick={() => navigate('/my-policies')}
+                onClick={() => navigate('/quote')}
                 className="btn-primary w-full sm:w-auto px-16 py-7 text-[17px] shadow-none"
               >
-                INITIALIZE PORTAL
+                Initialize My AI Policy
               </motion.button>
               <button 
-                onClick={() => navigate('/calculators')} 
+                onClick={() => navigate('/compare')} 
                 className="btn-secondary w-full sm:w-auto px-12 py-7 text-[16px] backdrop-blur-md"
               >
                 MARKET AUDIT

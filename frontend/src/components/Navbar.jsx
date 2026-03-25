@@ -16,9 +16,8 @@ export default function Navbar() {
   ];
 
   const moreLinks = [
-    { to: '/solutions', label: 'Solutions' },
-    { to: '/enterprise', label: 'Enterprise' },
-    { to: '/security', label: 'Security' },
+    { to: '/member', label: 'Member App' },
+    { to: '/provider', label: 'Provider Assistant' },
     { to: '/admin', label: 'Dashboard' },
   ];
 

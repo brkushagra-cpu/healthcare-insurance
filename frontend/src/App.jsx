@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Quote from './pages/Quote';
@@ -13,6 +13,8 @@ import Hospitals from './pages/Hospitals';
 import MyPolicies from './pages/MyPolicies';
 import Calculators from './pages/Calculators';
 import Security from './pages/Security';
+import MemberPortal from './pages/MemberPortal';
+import ProviderPortal from './pages/ProviderPortal';
 import Chatbot from './components/Chatbot';
 
 export default function App() {
@@ -33,6 +35,8 @@ export default function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/my-policies" element={<MyPolicies />} />
             <Route path="/calculators" element={<Calculators />} />
+            <Route path="/member" element={<MemberPortal />} />
+            <Route path="/provider" element={<ProviderPortal />} />
             <Route path="/security" element={<Security />} />
           </Routes>
         </main>

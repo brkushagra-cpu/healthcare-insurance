@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpDown, Star, CheckCircle2, X, Sparkles, Shield } from 'lucide-react';
+import hospitalNetwork from '../assets/hospital_network.png';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
@@ -18,14 +19,26 @@ export default function Compare() {
     fetch(`${API_URL}/compare?sort=${sort}`)
       .then(r => r.json())
       .then(d => { if (d.status === 'success') setPlans(d.data.plans); })
-      .catch(() => {});
+      .catch(() => {
+        // Mock Fallback for UAT
+        setPlans([
+          { id: 1, name: "Optima Secure", insurer: "HDFC Ergo", premium: 18500, coverage: 1000000, claimRatio: 98.4, cashlessHospitals: 12000, rating: 4.9, renewalBonus: "50% NCB", waitingPeriod: "3 Years", features: ["Restore Benefit", "Ayush Coverage", "No Room Rent Cap"] },
+          { id: 2, name: "ReAssure", insurer: "Niva Bupa", premium: 16200, coverage: 1000000, claimRatio: 97.2, cashlessHospitals: 10500, rating: 4.8, renewalBonus: "100% NCB", waitingPeriod: "2 Years", features: ["Booster Benefit", "Safe+ Support", "Modern Treatments"] },
+          { id: 3, name: "Health AdvantEdge", insurer: "ICICI Lombard", premium: 19800, coverage: 1000000, claimRatio: 99.1, cashlessHospitals: 14000, rating: 4.9, renewalBonus: "25% NCB", waitingPeriod: "4 Years", features: ["Comprehensive Cover", "Tele-consultation", "Global Cover"] }
+        ]);
+      });
   }, [sort]);
 
   useEffect(() => {
     fetch(`${API_URL}/compare/recommend`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ age: 30, budget, priorities: ['high-claim-ratio', 'best-hospitals'] })
-    }).then(r => r.json()).then(d => { if (d.status === 'success') setRecommendation(d.data); }).catch(() => {});
+    }).then(r => r.json()).then(d => { if (d.status === 'success') setRecommendation(d.data); }).catch(() => {
+      // Mock Fallback for UAT
+      setRecommendation({
+        recommended: { id: 1, name: "Optima Secure", insurer: "HDFC Ergo", premium: 18500, claimRatio: 98.4, cashlessHospitals: 12000 }
+      });
+    });
   }, [budget]);
 
   const toggle = (id) => setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : prev.length < 3 ? [...prev, id] : prev);
@@ -43,7 +56,7 @@ export default function Compare() {
       {/* Hero */}
       <section className="bg-[var(--bg-primary)] relative border-b border-[var(--border)] overflow-hidden min-h-[220px] flex items-center">
         <div className="absolute inset-0 z-0 opacity-20">
-          <img src="/assets/hospital_network.png" className="w-full h-full object-cover" alt="Network" />
+          <img src={hospitalNetwork} className="w-full h-full object-cover" alt="Network" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-primary)]/90 to-transparent z-10"></div>
         <div className="max-w-[1200px] mx-auto px-6 py-16 relative z-20">
