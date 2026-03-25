@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, MapPin, Star, Search, Shield, Clock, CheckCircle2, FileText } from 'lucide-react';
-import hospitalNetwork from '../assets/hospital_network.png';
+
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
@@ -62,7 +62,7 @@ export default function Hospitals() {
       {/* Hero */}
       <section className="bg-[var(--bg-primary)] relative border-b border-[var(--border)] overflow-hidden min-h-[220px] flex items-center">
         <div className="absolute inset-0 z-0 opacity-30">
-          <img src={hospitalNetwork} className="w-full h-full object-cover" alt="Medical Network" />
+          <img src="/assets/hospital_network.png" className="w-full h-full object-cover" alt="Medical Network" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--bg-primary)] z-10"></div>
         <div className="max-w-[1200px] mx-auto px-6 py-16 relative z-20">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Shield, Users, Clock, ChevronRight, Activity, Zap, BarChart3, Globe, Sparkles } from 'lucide-react';
-import luxeHeart from '../assets/luxe_heart.png';
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ export default function Home() {
             transition={{ type: "spring", stiffness: 100, damping: 30 }}
             className="absolute z-0 opacity-40 grayscale-[0.5] transition-opacity duration-1000"
           >
-            <img src={luxeHeart} className="w-[850px] h-auto pointer-events-none float-slow shadow-2xl" alt="Luxe Medical 3D" />
+            <img src="/assets/luxe_heart.png" className="w-[850px] h-auto pointer-events-none float-slow shadow-2xl" alt="Luxe Medical 3D" />
           </motion.div>
 
           {/* Central Prismatic Glass Card */}

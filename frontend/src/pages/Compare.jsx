@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpDown, Star, CheckCircle2, X, Sparkles, Shield } from 'lucide-react';
-import hospitalNetwork from '../assets/hospital_network.png';
+
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
@@ -56,7 +56,7 @@ export default function Compare() {
       {/* Hero */}
       <section className="bg-[var(--bg-primary)] relative border-b border-[var(--border)] overflow-hidden min-h-[220px] flex items-center">
         <div className="absolute inset-0 z-0 opacity-20">
-          <img src={hospitalNetwork} className="w-full h-full object-cover" alt="Network" />
+          <img src="/assets/hospital_network.png" className="w-full h-full object-cover" alt="Network" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-primary)] via-[var(--bg-primary)]/90 to-transparent z-10"></div>
         <div className="max-w-[1200px] mx-auto px-6 py-16 relative z-20">
