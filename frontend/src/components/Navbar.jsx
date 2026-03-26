@@ -66,7 +66,11 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <Link to="/quote" className="btn-primary py-2.5 px-6 text-[11px] shadow-none">Initialize</Link>
           {/* Mobile hamburger */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-white p-1">
+          <button 
+            onClick={() => setMobileOpen(!mobileOpen)} 
+            aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
+            className="md:hidden text-white p-1"
+          >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
@@ -74,12 +78,15 @@ export default function Navbar() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 bg-[var(--bg-primary)] px-6 py-6 space-y-2 shadow-2xl">
-          {[...mainLinks, ...moreLinks].map(link => (
-            <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)}
-              className={`block px-5 py-4 rounded-2xl text-[12px] font-black tracking-widest ${path === link.to ? 'text-[var(--accent-emerald)] bg-white/[0.05]' : 'text-slate-500'}`}
-            >{link.label}</Link>
-          ))}
+        <div className="md:hidden">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40" onClick={() => setMobileOpen(false)}></div>
+          <div className="fixed top-14 left-0 right-0 border-t border-white/10 bg-[var(--bg-primary)] px-6 py-6 space-y-2 shadow-2xl z-50">
+            {[...mainLinks, ...moreLinks].map(link => (
+              <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)}
+                className={`block px-5 py-4 rounded-2xl text-[12px] font-black tracking-widest ${path === link.to ? 'text-[var(--accent-emerald)] bg-white/[0.05]' : 'text-slate-500'}`}
+              >{link.label}</Link>
+            ))}
+          </div>
         </div>
       )}
     </nav>

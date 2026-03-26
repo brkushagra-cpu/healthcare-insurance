@@ -41,6 +41,9 @@ export default function Home() {
           >
             <img 
               src="assets/liquid_heart.png" 
+              width="850"
+              height="850"
+              style={{ aspectRatio: "1/1" }}
               className="w-[300px] md:w-[850px] h-auto pointer-events-none float-slow shadow-2xl mx-auto" 
               alt="Liquid Heart 3D" 
             />

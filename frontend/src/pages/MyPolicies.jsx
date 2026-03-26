@@ -64,7 +64,7 @@ export default function MyPolicies() {
           >
              <div className="absolute top-4 left-6 text-[10px] md:text-[11px] font-black text-slate-500 tracking-[0.3em] uppercase opacity-40">Portfolio Synthesis x85</div>
              <div className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity hidden md:block">
-                <img src="assets/clinical_matrix.png" className="w-full h-full object-cover" alt="Clinical Matrix Nodes" />
+                <img src="assets/clinical_matrix.png" width="800" height="800" style={{ objectFit: "cover" }} className="w-full h-full" alt="Clinical Matrix Nodes" />
              </div>
              <div className="relative z-10 w-48 h-48 md:w-64 md:h-64 mb-6">
                <svg className="w-full h-full transform -rotate-90">
