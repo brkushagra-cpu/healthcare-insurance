@@ -10,6 +10,7 @@ export default function MyPolicies() {
   const [policies, setPolicies] = useState([]);
   const [summary, setSummary] = useState(null);
   const [tab, setTab] = useState('policies');
+  const baseUrl = import.meta.env.BASE_URL || '/';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,10 +60,13 @@ export default function MyPolicies() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:col-span-2 prismatic-glass p-10 border-white/10 flex flex-col items-center justify-center relative overflow-hidden group hover:border-[var(--accent-emerald)]/30 transition-all"
+            className="md:col-span-2 prismatic-glass p-8 md:p-10 border-white/10 flex flex-col items-center justify-center relative overflow-hidden group hover:border-[var(--accent-emerald)]/30 transition-all"
           >
-             <div className="absolute top-4 left-6 text-[11px] font-black text-slate-500 tracking-[0.3em] uppercase opacity-40">Portfolio Synthesis x85</div>
-             <div className="relative w-64 h-64 mb-6">
+             <div className="absolute top-4 left-6 text-[10px] md:text-[11px] font-black text-slate-500 tracking-[0.3em] uppercase opacity-40">Portfolio Synthesis x85</div>
+             <div className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity hidden md:block">
+                <img src={`${baseUrl}assets/clinical_matrix.png`} className="w-full h-full object-cover" alt="Clinical Matrix Nodes" />
+             </div>
+             <div className="relative z-10 w-48 h-48 md:w-64 md:h-64 mb-6">
                <svg className="w-full h-full transform -rotate-90">
                  <circle cx="128" cy="128" r="110" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-white/5" />
                  <motion.circle 
@@ -178,8 +182,8 @@ export default function MyPolicies() {
                           <p className="text-[10px] text-white font-black tracking-widest uppercase">{p.policyNumber || 'EP-882-99'}</p>
                        </div>
                     </td>
-                    <td className="px-10 py-10">
-                       <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black text-white group-hover:border-[var(--accent-emerald)]/30 transition-all uppercase">
+                    <td className="px-6 md:px-10 py-6 md:py-10">
+                       <div className="inline-flex items-center gap-2.5 px-3 md:px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[9px] md:text-[10px] font-black text-white group-hover:border-[var(--accent-emerald)]/30 transition-all uppercase">
                          <div className={`w-2 h-2 rounded-full ${p.status === 'Active' ? 'bg-[var(--accent-emerald)] glow-emerald animate-pulse' : 'bg-slate-500'}`}></div>
                          {String(p.status || 'Active').toUpperCase()}
                        </div>

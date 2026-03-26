@@ -4,6 +4,7 @@ import { Shield, ChevronDown, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
+  const baseUrl = import.meta.env.BASE_URL || '/';
   const path = location.pathname;
   const [showMore, setShowMore] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,9 +25,9 @@ export default function Navbar() {
   return (
     <nav className="glass-nav sticky top-0 z-50 transition-all duration-500">
       <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 font-black text-white text-[17px] tracking-tighter">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[var(--accent-emerald)] to-[var(--accent-violet)] flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform">
-            <Shield size={18} className="text-[var(--bg-primary)] fill-current" />
+        <Link to="/" className="flex items-center gap-2.5 font-black text-white text-[16px] md:text-[17px] tracking-tighter">
+          <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-[var(--accent-emerald)] to-[var(--accent-violet)] flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform">
+            <Shield size={16} className="text-[var(--bg-primary)] fill-current" />
           </div>
           Eptain<span className="text-[var(--accent-emerald)]">.ai</span>
         </Link>

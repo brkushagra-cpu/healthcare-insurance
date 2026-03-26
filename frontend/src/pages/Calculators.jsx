@@ -9,6 +9,7 @@ export default function Calculators() {
   const [isScanning, setIsScanning] = useState(false);
   const [pForm, setPForm] = useState({ age: 30, coverage: 1000000, members: 1, type: 'Health', tenure: 1 });
   const [pResult, setPResult] = useState(null);
+  const baseUrl = import.meta.env.BASE_URL || '/';
 
   // Tax calc state
   const [tForm, setTForm] = useState({ premium: 12000, age: 30, parentsPremium: 0, parentsAge: 55, regime: 'old' });
@@ -72,7 +73,7 @@ export default function Calculators() {
             
             {/* 3D Console Graphic */}
             <div className="hidden lg:block absolute top-[-10%] right-[-10%] w-[450px] opacity-20 pointer-events-none">
-              <img src="/assets/luxe_console.png" alt="Diagnostic Console" className="float-slow" />
+              <img src={`${baseUrl}assets/clinical_matrix.png`} alt="Diagnostic Console" className="float-slow" />
             </div>
 
             {/* Input Panel */}
@@ -124,8 +125,9 @@ export default function Calculators() {
             {/* Results Display Panel */}
             <div className="lg:w-1/2 flex flex-col justify-center items-center text-center relative z-10 border-l border-white/10 pl-16 min-h-[500px]">
               {isScanning && (
-                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[var(--bg-primary)]/40 backdrop-blur-md rounded-r-[var(--radius-lg)]">
+                <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[var(--bg-primary)]/40 backdrop-blur-md rounded-[var(--radius-lg)]">
                   <div className="neural-scan-beam"></div>
+                  <img src={`${baseUrl}assets/liquid_heart.png`} className="w-16 h-16 md:w-20 md:h-20 mb-6 animate-pulse" alt="Liquid Heart" />
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 1, 0] }}
@@ -134,7 +136,7 @@ export default function Calculators() {
                   >
                     NEURAL MATRIX SCANNING...
                   </motion.div>
-                   <p className="text-[10px] text-slate-500 font-bold mt-2">ADJUDICATING CLINICAL DATA</p>
+                   <p className="text-[10px] text-slate-500 font-bold mt-2 uppercase tracking-[0.2em]">Adjudicating Clinical Matrix</p>
                 </div>
               )}
 
