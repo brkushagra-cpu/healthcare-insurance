@@ -73,7 +73,7 @@ export default function Calculators() {
             
             {/* 3D Console Graphic */}
             <div className="hidden lg:block absolute top-[-10%] right-[-10%] w-[450px] opacity-20 pointer-events-none">
-              <img src={`${baseUrl}assets/clinical_matrix.png`} alt="Diagnostic Console" className="float-slow" />
+              <img src="assets/clinical_matrix.png" alt="Diagnostic Console" className="float-slow" />
             </div>
 
             {/* Input Panel */}
@@ -127,7 +127,7 @@ export default function Calculators() {
               {isScanning && (
                 <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[var(--bg-primary)]/40 backdrop-blur-md rounded-[var(--radius-lg)]">
                   <div className="neural-scan-beam"></div>
-                  <img src={`${baseUrl}assets/liquid_heart.png`} className="w-16 h-16 md:w-20 md:h-20 mb-6 animate-pulse" alt="Liquid Heart" />
+                  <img src="assets/liquid_heart.png" className="w-16 h-16 md:w-20 md:h-20 mb-6 animate-pulse" alt="Liquid Heart" />
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 1, 0] }}

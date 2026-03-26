@@ -40,8 +40,8 @@ export default function Home() {
             className="absolute z-0 opacity-40 grayscale-[0.2] hover:grayscale-0 transition-opacity duration-1000 top-[-20%] md:top-[-40%]"
           >
             <img 
-              src={`${baseUrl}assets/liquid_heart.png`} 
-              className="w-[350px] md:w-[850px] h-auto pointer-events-none float-slow shadow-2xl" 
+              src="assets/liquid_heart.png" 
+              className="w-[300px] md:w-[850px] h-auto pointer-events-none float-slow shadow-2xl mx-auto" 
               alt="Liquid Heart 3D" 
             />
           </motion.div>
@@ -132,8 +132,8 @@ export default function Home() {
            >
               <div className="absolute inset-0 bg-gradient-to-tr from-[var(--accent-emerald)]/10 to-transparent blur-[80px]"></div>
               <img 
-                src={`${baseUrl}assets/family_luxe.png`} 
-                className="w-full h-auto relative z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.5)] float-slow" 
+                src="assets/family_luxe.png" 
+                className="w-full h-auto relative z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.5)] float-slow mx-auto" 
                 alt="Family Luxe 3D" 
               />
            </motion.div>
